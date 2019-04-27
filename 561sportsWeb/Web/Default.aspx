@@ -11,11 +11,11 @@
         <div class="gszc">
             
         	<div class="gszc_title"><p>运动新闻</p><div class="more1"><a href="news.aspx">more</a></div></div>
-            <div class="gszc_contect" style="height:356px;">
+            <div class="gszc_contect" style="height:356px;font-size:small;">
             	<ul>
                     
                            
-                    <asp:Repeater ID="Repeater2" runat="server">
+                    <asp:Repeater ID="Repeater2" runat="server" >
                         <ItemTemplate>
                              	<li><a href="newView.aspx?id=<%# Eval("nid") %>"><%# Eval("title") %></a></li>
                         </ItemTemplate>
@@ -30,7 +30,7 @@
         <div class="dbzz">
             
         	<div class="gszc_title"><p>健身方案</p><div class="more1"><a href="plan.aspx">more</a></div></div>
-            <div class="gszc_contect"  style="height:356px;">
+            <div class="gszc_contect"  style="height:356px;font-size:small;">
             	<ul>
                     
                          <asp:Repeater ID="Repeater3" runat="server">
@@ -48,7 +48,7 @@
         <div class="kjfw">
             
         	<div class="gszc_title"><p>装备选择</p><div class="more1"><a href="zb.aspx">more</a></div></div>
-            <div class="gszc_contect"  style="height:356px;">
+            <div class="gszc_contect"  style="height:356px;font-size:small;">
             	<ul>
                     
                 
