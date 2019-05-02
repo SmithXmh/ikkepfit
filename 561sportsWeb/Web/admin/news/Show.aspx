@@ -12,7 +12,7 @@
                 <table>
                     <tr>
                         <td><img src="../../images/main_home.gif" width="16" height="16" /></td>
-                        <td><label><span id="navTitle">运动新闻管理---查看运动新闻</span></label></td>
+                        <td><label><span id="navTitle">健身资讯管理---查看健身资讯</span></label></td>
                     </tr>
                 </table>
             </td>
@@ -40,15 +40,20 @@
 	<td height="25" width="*" align="left" style="text-align:left"><asp:Label ID="lblnid" runat="server" Text=""></asp:Label></td>
 	</tr>
  <tr>
-	<td height="25" width="20%" align="right">新闻标题：</td>
+	<td height="25" width="20%" align="right">资讯标题：</td>
 	<td height="25" width="*" align="left" style="text-align:left"><asp:Label ID="lbltitle" runat="server" Text=""></asp:Label></td>
 	</tr>
  <tr>
 	<td height="25" width="20%" align="right">所属类别：</td>
 	<td height="25" width="*" align="left" style="text-align:left"><asp:Label ID="lbltid" runat="server" Text=""></asp:Label></td>
 	</tr>
+
+               <tr>
+	<td height="25" width="20%" align="right">资讯图片：</td>
+	<td height="25" width="*" align="left" style="text-align:left"><asp:Image ID="imgbgpic" runat="server" Width="120" Height="120" /></td>
+	</tr>
  <tr>
-	<td height="25" width="20%" align="right">新闻内容：</td>
+	<td height="25" width="20%" align="right">资讯内容：</td>
 	<td height="25" width="*" align="left" style="text-align:left"><asp:Label ID="lblmemo" runat="server" Text=""></asp:Label></td>
 	</tr>
  <tr>

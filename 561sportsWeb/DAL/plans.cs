@@ -46,19 +46,26 @@ namespace SP.DAL
 		{
 			StringBuilder strSql=new StringBuilder();
 			strSql.Append("insert into plans(");
-			strSql.Append("title,tid,memo,atime)");
+            strSql.Append("title,tid,bgpic,mark,memo,remarks,atime)");
 			strSql.Append(" values (");
-			strSql.Append("@title,@tid,@memo,@atime)");
+            strSql.Append("@title,@tid,@bgpic,@mark,@memo,@remarks,@atime)");
 			strSql.Append(";select @@IDENTITY");
 			SqlParameter[] parameters = {
 					new SqlParameter("@title", SqlDbType.VarChar,50),
                     new SqlParameter("@tid", SqlDbType.Int,4),
+                    new SqlParameter("@bgpic", SqlDbType.VarChar,100),
+                      new SqlParameter("@mark", SqlDbType.Int,4),
 					new SqlParameter("@memo", SqlDbType.NText),
+                    new SqlParameter("@remarks", SqlDbType.NText),
+                  
 					new SqlParameter("@atime", SqlDbType.DateTime)};
 			parameters[0].Value = model.title;
             parameters[1].Value = model.tid;
-			parameters[2].Value = model.memo;
-			parameters[3].Value = model.atime;
+            parameters[2].Value = model.bgpic;
+            parameters[3].Value =  model.mark;
+            parameters[4].Value =  model.memo;
+            parameters[5].Value = model.remarks; 
+			parameters[6].Value = model.atime;
 
 			object obj = DbHelperSQL.GetSingle(strSql.ToString(),parameters);
 			if (obj == null)
@@ -79,20 +86,31 @@ namespace SP.DAL
 			strSql.Append("update plans set ");
 			strSql.Append("title=@title,");
             strSql.Append("tid=@tid,");
+            strSql.Append("bgpic=@bgpic,");
+            strSql.Append("mark=@mark,");
 			strSql.Append("memo=@memo,");
+            strSql.Append("remarks=@remarks,");
+            
 			strSql.Append("atime=@atime");
 			strSql.Append(" where pid=@pid");
 			SqlParameter[] parameters = {
 					new SqlParameter("@title", SqlDbType.VarChar,50),
                     new SqlParameter("@tid", SqlDbType.Int,4),
+                    new SqlParameter("@bgpic", SqlDbType.VarChar,100),
+                     new SqlParameter("@mark", SqlDbType.Int,4),
 					new SqlParameter("@memo", SqlDbType.NText),
+                    new SqlParameter("@remarks", SqlDbType.NText),
+                   
 					new SqlParameter("@atime", SqlDbType.DateTime),
 					new SqlParameter("@pid", SqlDbType.Int,4)};
 			parameters[0].Value = model.title;
             parameters[1].Value = model.tid;
-			parameters[2].Value = model.memo;
-			parameters[3].Value = model.atime;
-			parameters[4].Value = model.pid;
+            parameters[2].Value = model.mark;
+            parameters[3].Value = model.mark;
+            parameters[4].Value =  model.memo;
+            parameters[5].Value =  model.remarks;
+			parameters[6].Value = model.atime;
+			parameters[7].Value = model.pid;
 
 			int rows=DbHelperSQL.ExecuteSql(strSql.ToString(),parameters);
 			if (rows > 0)
@@ -156,7 +174,7 @@ namespace SP.DAL
 		{
 			
 			StringBuilder strSql=new StringBuilder();
-			strSql.Append("select  top 1 pid,title,tid,memo,atime from plans ");
+			strSql.Append("select  top 1 pid,title,tid,bgpic,mark,memo,remarks,atime from plans ");
 			strSql.Append(" where pid=@pid");
 			SqlParameter[] parameters = {
 					new SqlParameter("@pid", SqlDbType.Int,4)
@@ -196,10 +214,23 @@ namespace SP.DAL
                 {
                     model.tid = int.Parse(row["tid"].ToString());
                 }
+                if (row["pic"] != null)
+                {
+                    model.bgpic = row["bgpic"].ToString();
+                }
+                if (row["mark"] != null)
+                {
+                    model.mark = int.Parse(row["mark"].ToString());
+                }
 				if(row["memo"]!=null)
 				{
 					model.memo=row["memo"].ToString();
 				}
+                if (row["remarks"] != null)
+                {
+                    model.memo = row["remarks"].ToString();
+                }
+
 				if(row["atime"]!=null && row["atime"].ToString()!="")
 				{
 					model.atime=DateTime.Parse(row["atime"].ToString());
@@ -233,7 +264,7 @@ namespace SP.DAL
 			{
 				strSql.Append(" top "+Top.ToString());
 			}
-			strSql.Append(" pid,title,tid,memo,atime ");
+			strSql.Append(" pid,title,tid,bgpic,mark,memo,remarks,atime ");
 			strSql.Append(" FROM plans ");
 			if(strWhere.Trim()!="")
 			{
