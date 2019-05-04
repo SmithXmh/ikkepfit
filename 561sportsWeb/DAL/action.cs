@@ -46,19 +46,24 @@ namespace SP.DAL
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("insert into action(");
-            strSql.Append("title,pic,memo,atime)");
+            strSql.Append("title,pic,levid,acal,memo,atime)");
             strSql.Append(" values (");
-            strSql.Append("@title,@pic,@memo,@atime)");
+            strSql.Append("@title,@pic,@levid,@acal,@memo,@atime)");
             strSql.Append(";select @@IDENTITY");
             SqlParameter[] parameters = {
 					new SqlParameter("@title", SqlDbType.VarChar,50),
 					new SqlParameter("@pic", SqlDbType.VarChar,100),
+                    new SqlParameter("@levid",SqlDbType.Int,4),
+                    new SqlParameter("@acal",SqlDbType.Int,4),
 					new SqlParameter("@memo", SqlDbType.NText),
 					new SqlParameter("@atime", SqlDbType.DateTime)};
             parameters[0].Value = model.title;
             parameters[1].Value = model.pic;
-            parameters[2].Value = model.memo;
-            parameters[3].Value = model.atime;
+            parameters[2].Value = model.levid;
+            parameters[3].Value = model.acal;
+            parameters[4].Value = model.memo;
+            parameters[5].Value = model.atime;
+
 
             object obj = DbHelperSQL.GetSingle(strSql.ToString(), parameters);
             if (obj == null)
@@ -79,18 +84,26 @@ namespace SP.DAL
             strSql.Append("update action set ");
             strSql.Append("title=@title,");
             strSql.Append("pic=@pic,");
+            strSql.Append("levid=@levid,");
+            strSql.Append("acal=@acal,");
             strSql.Append("memo=@memo");
 
             strSql.Append(" where id=@id");
             SqlParameter[] parameters = {
 					new SqlParameter("@title", SqlDbType.VarChar,50),
 					new SqlParameter("@pic", SqlDbType.VarChar,100),
+                    new SqlParameter("@levid",SqlDbType.Int,4),
+                    new SqlParameter("@acal",SqlDbType.Int,4),
 					new SqlParameter("@memo", SqlDbType.NText),
-					new SqlParameter("@id", SqlDbType.Int,4)};
+            new SqlParameter("@id",SqlDbType.Int,4)};
+
             parameters[0].Value = model.title;
             parameters[1].Value = model.pic;
-            parameters[2].Value = model.memo;
-            parameters[3].Value = model.id;
+            parameters[2].Value = model.levid;
+            parameters[3].Value = model.acal;
+            parameters[4].Value = model.memo;
+            parameters[5].Value = model.id;
+
 
             int rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
             if (rows > 0)
@@ -154,7 +167,7 @@ namespace SP.DAL
         {
 
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select  top 1 id,title,pic,memo,atime from action ");
+            strSql.Append("select  top 1 id,title,pic,levid,acal,memo,atime from action ");
             strSql.Append(" where id=@id");
             SqlParameter[] parameters = {
 					new SqlParameter("@id", SqlDbType.Int,4)
@@ -194,6 +207,14 @@ namespace SP.DAL
                 {
                     model.pic = row["pic"].ToString();
                 }
+                if (row["levid"] != null && row["levid"].ToString() != "")
+                {
+                    model.levid = int.Parse(row["levid"].ToString());
+                }
+                if (row["acal"] != null && row["acal"].ToString() != "")
+                {
+                    model.acal = int.Parse(row["acal"].ToString());
+                }
                 if (row["memo"] != null)
                 {
                     model.memo = row["memo"].ToString();
@@ -209,11 +230,11 @@ namespace SP.DAL
         /// <summary>
         /// 获得数据列表
         /// </summary>
+
         public DataSet GetList(string strWhere)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select id,title,pic,memo,atime ");
-            strSql.Append(" FROM action ");
+            strSql.Append("select  a.*,b.levname from action a  left join actionType b on a.levid=b.levid ");
             if (strWhere.Trim() != "")
             {
                 strSql.Append(" where " + strWhere);
@@ -232,7 +253,7 @@ namespace SP.DAL
             {
                 strSql.Append(" top " + Top.ToString());
             }
-            strSql.Append(" id,title,pic,memo,atime ");
+            strSql.Append(" id,title,pic,levid,acal,memo,atime ");
             strSql.Append(" FROM action ");
             if (strWhere.Trim() != "")
             {

@@ -79,7 +79,11 @@
 <td class="tbright"><div style="display:inline;float:left;">
 <asp:Image ID="Imagepic" runat="server"  Width="60px" Height="60px" /><asp:Label ID="Labelpic"  Visible="false" runat="server"  ></asp:Label><asp:FileUpload ID="fppic" runat="server" Width="250" />支持格式为：.jpg | .gif | .png
  </td></tr>
-
+             <tr>
+<td  style=" text-align:right; width:20%;">食物热量:</td>
+<td class="tbright"><div style="display:inline;float:left;">
+<asp:TextBox ID="txt_fcal" runat="server" width="200"></asp:TextBox></div><div id="ctl00_ContentPlaceHolder1_txt_fcalTip" style="width:250px;display:inline;float:left;text-align:left;"></div>
+ </td></tr>
 <tr>
 <td  style=" text-align:right; width:20%;">食物描述:</td>
 <td class="tbright"><div style="display:inline;float:left;">
@@ -101,8 +105,8 @@
 <span class="frmbar" style="margin:0 11px;"></span><span class="frmbar" style="margin:0 12px;"></span>
 </div>
 <script language="javascript" type="text/javascript">
-    $(document).ready(function() {
-        $.formValidator.initConfig({ onError: function(msg) { alert(msg) } });
+    $(document).ready(function () {
+        $.formValidator.initConfig({ onError: function (msg) { alert(msg) } });
         $("#ctl00_ContentPlaceHolder1_txt_title").formValidator({ onshow: "请输入食物名称", onfocus: "食物名称不能为空", oncorrect: "合法" }).InputValidator({ min: 1, onerror: "食物名称不能为空,请确认" });
     });
 </script>

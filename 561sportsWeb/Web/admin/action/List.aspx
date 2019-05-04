@@ -37,7 +37,8 @@
             
           <table width="100%"  border="0" align="center" cellpadding="5" cellspacing="1" bgcolor="#ecf5ff">
            <tr>
-            <td align="center">
+            <td align="center"><strong> 动作等级</strong><asp:DropDownList ID="ddllevid" runat="server" Width="150">
+</asp:DropDownList> 
             <strong> 动作名称:</strong><asp:TextBox ID="txt_title" runat="server" width="150"></asp:TextBox>
 
     <asp:Button ID="Button1" runat="server" Text="搜 索"   onclick="btnSearch_Click" />
@@ -51,6 +52,8 @@
             <img alt="" src="../../uploads/<%#Eval("pic")%>" width="100"  height="80" />
             </ItemTemplate>
             </asp:TemplateField>
+             <asp:BoundField HeaderText="动作等级" DataField="levid" />
+              <asp:BoundField HeaderText="动作卡路里" DataField="acal" />
             <asp:BoundField HeaderText="发布时间" DataField="atime" />
             <asp:HyperLinkField   DataNavigateUrlFormatString="Show.aspx?id={0}" DataNavigateUrlFields="id" HeaderText="详细" Text="详细"  >
                 <ItemStyle Width="50px" />

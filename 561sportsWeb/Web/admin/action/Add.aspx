@@ -80,6 +80,16 @@
 <asp:FileUpload ID="fppic" runat="server" Width="250" />支持格式为：.jpg | .gif | .png
  </td></tr>
 
+              <tr>
+<td  style=" text-align:right; width:20%;">等级:</td>
+<td class="tbright"><div style="display:inline;float:left;">
+<asp:DropDownList ID="ddllevid" runat="server" Width="200">
+</asp:DropDownList> </td></tr>
+              <td  style=" text-align:right; width:20%;">动作卡路里:</td>
+<td class="tbright"><div style="display:inline;float:left;">
+<asp:TextBox ID="txt_acal" runat="server" width="200"></asp:TextBox></div><div id="ctl00_ContentPlaceHolder1_txt_acalTip" style="width:250px;display:inline;float:left;text-align:left;"></div>
+ </td></tr>
+
 <tr>
 <td  style=" text-align:right; width:20%;">动作描述:</td>
 <td class="tbright"><div style="display:inline;float:left;">
@@ -101,8 +111,8 @@
 <span class="frmbar" style="margin:0 11px;"></span><span class="frmbar" style="margin:0 12px;"></span>
 </div>
 <script language="javascript" type="text/javascript">
-    $(document).ready(function() {
-        $.formValidator.initConfig({ onError: function(msg) { alert(msg) } });
+    $(document).ready(function () {
+        $.formValidator.initConfig({ onError: function (msg) { alert(msg) } });
         $("#ctl00_ContentPlaceHolder1_txt_title").formValidator({ onshow: "请输入动作名称", onfocus: "动作名称不能为空", oncorrect: "合法" }).InputValidator({ min: 1, onerror: "动作名称不能为空,请确认" });
     });
 </script>
